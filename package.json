@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "next-sanity": {
+      "next": "$next"
+    }
+  },
   "dependencies": {
     "@sanity/client": "^7.13.2",
     "@sanity/image-url": "^2.0.2",
