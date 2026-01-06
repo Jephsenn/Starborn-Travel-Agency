@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow relative z-0">
           {children}
         </main>
         <Footer />

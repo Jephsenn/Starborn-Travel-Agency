@@ -23,11 +23,11 @@ export default function Footer() {
           {/* Logo and Business Info */}
           <div className="md:col-span-2">
             <Image
-              src="/Starborn_Travel_Agency_Logo_plain.png"
+              src="/Starborn_Travel_Agency_Logo_plain2.png"
               alt="Starborn Travel Agency"
               width={180}
               height={54}
-              className="h-10 w-auto mb-4 brightness-0 invert"
+              className="h-10 w-auto mb-4"
             />
             <p className="text-neutral-300 mb-4">
               Your trusted partner for personalized travel planning. Creating unforgettable journeys, one trip at a time.

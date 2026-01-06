@@ -48,4 +48,13 @@
   .heading-sm {
     @apply text-xl md:text-2xl font-semibold text-neutral-900;
   }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

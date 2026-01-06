@@ -119,15 +119,6 @@ export default function About() {
                       className="object-cover"
                       sizes="256px"
                     />
-                    {/* Placeholder overlay - remove when you add Sara's photo */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <svg className="w-24 h-24 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <p className="text-sm font-medium">Add Sara Photo</p>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 

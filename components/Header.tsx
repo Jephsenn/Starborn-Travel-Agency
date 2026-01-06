@@ -19,11 +19,11 @@ export default function Header() {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center z-10">
             <Image
-              src="/Starborn_Travel_Agency_Logo.png"
+              src="/Starborn_Travel_Agency_Logo_plain2.png"
               alt="Starborn Travel Agency"
               width={200}
               height={60}
@@ -32,8 +32,8 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Centered */}
+          <ul className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -48,7 +48,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-neutral-700 hover:text-primary focus:outline-none"
+            className="md:hidden text-neutral-700 hover:text-primary focus:outline-none z-10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
