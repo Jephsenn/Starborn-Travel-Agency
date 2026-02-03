@@ -182,7 +182,7 @@ export default function SpecialInterests() {
           <div className="container-custom max-w-3xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Plan Your Perfect Trip?</h2>
             <p className="text-xl mb-8 text-neutral-100">
-              Tell us about your interests and travel style, and we'll create a personalized 
+              Tell us about your interests and travel style, and we&apos;ll create a personalized 
               itinerary that exceeds your expectations.
             </p>
             <Link href="/contact" className="btn-secondary">

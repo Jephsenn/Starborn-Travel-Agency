@@ -138,7 +138,7 @@ export default function Resources() {
           <div className="container-custom max-w-4xl text-center">
             <h2 className="heading-lg mb-6">Travel Smarter, Not Harder</h2>
             <p className="text-lg text-neutral-700 leading-relaxed">
-              Whether you're a seasoned traveler or planning your first big trip, these resources 
+              Whether you&apos;re a seasoned traveler or planning your first big trip, these resources 
               will help you prepare, pack, and navigate your journey with confidence.
             </p>
           </div>
@@ -212,7 +212,7 @@ export default function Resources() {
             <h2 className="heading-md mb-6">Printable Travel Checklists</h2>
             <p className="text-lg text-neutral-700 mb-8">
               Download our comprehensive packing lists and travel prep checklists to ensure 
-              you don't forget anything important.
+              you don&apos;t forget anything important.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white p-6 rounded-lg shadow">

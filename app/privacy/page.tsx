@@ -32,7 +32,7 @@ export default function Privacy() {
 
             <h2 className="heading-md mb-4">Introduction</h2>
             <p className="text-neutral-700 mb-6 leading-relaxed">
-              Starborn Travel Agency ("we," "our," or "us") is committed to protecting your privacy. 
+              Starborn Travel Agency (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you visit our website or use our services.
             </p>
@@ -116,7 +116,7 @@ export default function Privacy() {
               policies before providing any personal information.
             </p>
 
-            <h2 className="heading-md mb-4 mt-8">Children's Privacy</h2>
+            <h2 className="heading-md mb-4 mt-8">Children&apos;s Privacy</h2>
             <p className="text-neutral-700 mb-6 leading-relaxed">
               Our services are not directed to children under 13. We do not knowingly collect personal 
               information from children. If you believe we have collected information from a child, 
@@ -126,7 +126,7 @@ export default function Privacy() {
             <h2 className="heading-md mb-4 mt-8">Changes to This Policy</h2>
             <p className="text-neutral-700 mb-6 leading-relaxed">
               We may update this Privacy Policy from time to time. Changes will be posted on this page 
-              with an updated "Last Updated" date. We encourage you to review this policy periodically.
+              with an updated &quot;Last Updated&quot; date. We encourage you to review this policy periodically.
             </p>
 
             <h2 className="heading-md mb-4 mt-8">Contact Us</h2>
