@@ -90,7 +90,7 @@ export default function Gallery() {
             <h2 className="heading-md mb-6">Ready to Create Your Own Memories?</h2>
             <p className="text-lg text-neutral-700 mb-8 leading-relaxed">
               These destinations are waiting for you. Let us help you plan an unforgettable journey 
-              that you'll treasure forever.
+              that you&apos;ll treasure forever.
             </p>
             <a href="/contact" className="btn-primary">
               Start Planning Your Adventure

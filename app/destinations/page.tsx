@@ -135,7 +135,7 @@ export default function Destinations() {
       <FadeInSection>
         <section className="section-padding bg-primary text-white">
           <div className="container-custom max-w-3xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Don't See Your Dream Destination?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Don&apos;t See Your Dream Destination?</h2>
             <p className="text-xl mb-8 text-neutral-100">
               We can help you plan travel anywhere in the world. Contact us to discuss your unique travel goals!
             </p>

@@ -111,7 +111,7 @@ export default function GroupTravel() {
           <div className="container-custom max-w-4xl text-center">
             <h2 className="heading-lg mb-6">Travel Better Together</h2>
             <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              Planning group travel can be complicated, but it doesn't have to be. We handle all the 
+              Planning group travel can be complicated, but it doesn&apos;t have to be. We handle all the 
               details, coordinate with everyone, and secure group discounts so you can focus on 
               enjoying time with your loved ones or colleagues.
             </p>
@@ -124,7 +124,7 @@ export default function GroupTravel() {
               <div className="bg-neutral-100 p-6 rounded-lg">
                 <div className="text-4xl mb-3">🎯</div>
                 <h3 className="font-semibold text-lg mb-2">One Point of Contact</h3>
-                <p className="text-neutral-700">We coordinate everything so you don't have to</p>
+                <p className="text-neutral-700">We coordinate everything so you don&apos;t have to</p>
               </div>
               <div className="bg-neutral-100 p-6 rounded-lg">
                 <div className="text-4xl mb-3">⚡</div>
