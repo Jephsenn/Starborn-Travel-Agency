@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import HeroImageGrid from '@/components/HeroImageGrid';
+import HeroSingle from '@/components/HeroSingle';
 
 export const metadata: Metadata = {
   title: 'Our Services | Starborn Travel Agency',
@@ -8,11 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function Services() {
-  const heroImages = [
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Cruise Ship Deck Views' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Disney Park Experience' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Beach Paradise Destination' },
-  ];
   const services = [
     {
       id: 'vacation-planning',
@@ -129,9 +124,13 @@ export default function Services() {
 
   return (
     <>
+      {/* Preload hero image */}
+      <link rel="preload" as="image" href="/images/image (16).webp" />
+
       {/* Hero Section */}
-      <HeroImageGrid
-        images={heroImages}
+      <HeroSingle
+        imageSrc="/images/image (16).webp"
+        imageAlt="Our Travel Services"
         title="Our Travel Services"
         subtitle="Comprehensive planning for every type of journey"
         overlay="gradient"

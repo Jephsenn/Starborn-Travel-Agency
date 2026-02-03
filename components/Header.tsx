@@ -6,14 +6,23 @@ import { useState } from 'react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
 
-  const navLinks = [
+  const mainNavLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
+    { href: '/destinations', label: 'Destinations' },
     { href: '/promos', label: 'Promotions' },
-    { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
+  ];
+
+  const moreNavLinks = [
+    { href: '/special-interests', label: 'Special Interests' },
+    { href: '/group-travel', label: 'Group Travel' },
+    { href: '/resources', label: 'Travel Resources' },
+    { href: '/gallery', label: 'Photo Gallery' },
+    { href: '/faq', label: 'FAQ' },
   ];
 
   return (
@@ -34,7 +43,7 @@ export default function Header() {
 
           {/* Desktop Navigation - Centered */}
           <ul className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            {navLinks.map((link) => (
+            {mainNavLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -44,6 +53,36 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            {/* More Dropdown */}
+            <li className="relative">
+              <button
+                className="text-neutral-700 hover:text-primary font-medium transition-colors duration-200 flex items-center"
+                onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                onMouseEnter={() => setMoreDropdownOpen(true)}
+              >
+                More
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {moreDropdownOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50"
+                  onMouseLeave={() => setMoreDropdownOpen(false)}
+                >
+                  {moreNavLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="block px-4 py-2 text-neutral-700 hover:bg-neutral-100 hover:text-primary transition-colors duration-200"
+                      onClick={() => setMoreDropdownOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
           </ul>
 
           {/* Mobile Menu Button */}
@@ -67,7 +106,7 @@ export default function Header() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <ul className="md:hidden mt-4 space-y-2 pb-4">
-            {navLinks.map((link) => (
+            {mainNavLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -78,6 +117,19 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            <li className="border-t border-neutral-200 pt-2 mt-2">
+              <div className="text-xs text-neutral-500 uppercase font-semibold mb-2 px-2">More</div>
+              {moreNavLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block py-2 pl-4 text-neutral-700 hover:text-primary font-medium transition-colors duration-200"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </li>
           </ul>
         )}
       </nav>

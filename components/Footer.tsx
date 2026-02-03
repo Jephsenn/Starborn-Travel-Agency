@@ -8,12 +8,18 @@ export default function Footer() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
+    { href: '/destinations', label: 'Destinations' },
+    { href: '/special-interests', label: 'Special Interests' },
   ];
 
   const resourceLinks = [
+    { href: '/group-travel', label: 'Group Travel' },
+    { href: '/resources', label: 'Travel Resources' },
+    { href: '/gallery', label: 'Photo Gallery' },
     { href: '/promos', label: 'Promotions' },
     { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
+    { href: '/privacy', label: 'Privacy Policy' },
   ];
 
   return (

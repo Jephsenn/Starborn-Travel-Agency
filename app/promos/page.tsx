@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PromotionCard from '@/components/PromotionCard';
-import HeroImageGrid from '@/components/HeroImageGrid';
+import HeroSingle from '@/components/HeroSingle';
 import { promotions, getPromotionsByCategory } from '@/data/promotions';
 
 export const metadata: Metadata = {
@@ -10,11 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function Promos() {
-  const heroImages = [
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Amazing Travel Deals' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Cruise at Sunset' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Disney Fireworks Magic' },
-  ];
   const airfarePromos = getPromotionsByCategory('airfare');
   const cruisePromos = getPromotionsByCategory('cruise');
   const disneyPromos = getPromotionsByCategory('disney');
@@ -22,9 +17,13 @@ export default function Promos() {
 
   return (
     <>
+      {/* Preload hero image */}
+      <link rel="preload" as="image" href="/images/image (35).webp" />
+
       {/* Hero Section */}
-      <HeroImageGrid
-        images={heroImages}
+      <HeroSingle
+        imageSrc="/images/image (35).webp"
+        imageAlt="Current Promotions and Deals"
         title="Current Promotions & Deals"
         subtitle="Exclusive travel offers to help you save on your next adventure"
         overlay="gradient"

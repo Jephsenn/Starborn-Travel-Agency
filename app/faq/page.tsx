@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import FAQAccordionItem from '@/components/FAQAccordionItem';
-import HeroImageGrid from '@/components/HeroImageGrid';
+import HeroSingle from '@/components/HeroSingle';
 import { faqs } from '@/data/faqs';
 
 export const metadata: Metadata = {
@@ -10,16 +10,15 @@ export const metadata: Metadata = {
 };
 
 export default function FAQ() {
-  const heroImages = [
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Expert Customer Service' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Travel Consultation' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Peace of Mind Travel' },
-  ];
   return (
     <>
+      {/* Preload hero image */}
+      <link rel="preload" as="image" href="/images/image (21).webp" />
+
       {/* Hero Section */}
-      <HeroImageGrid
-        images={heroImages}
+      <HeroSingle
+        imageSrc="/images/image (21).webp"
+        imageAlt="Frequently Asked Questions"
         title="Frequently Asked Questions"
         subtitle="Everything you need to know about working with Starborn Travel Agency"
         overlay="dark"

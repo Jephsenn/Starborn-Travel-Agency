@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PromotionCard from '@/components/PromotionCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import FAQAccordionItem from '@/components/FAQAccordionItem';
-import HeroImageGrid from '@/components/HeroImageGrid';
+import HeroCarousel from '@/components/HeroCarousel';
 import PromoBar from '@/components/PromoBar';
 import ScrollAnimations from '@/components/ScrollAnimations';
 import FadeInSection from '@/components/FadeInSection';
@@ -17,12 +17,12 @@ export default function Home() {
   const featuredTestimonials = testimonials.slice(0, 3);
 
   const heroImages = [
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Luxury Cruise Ship at Sea' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Disney Castle Magic Kingdom' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Caribbean Beach Paradise' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Florida Sunset Beach' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Family Vacation Memories' },
-    { src: '/Starborn_Travel_Agency_Banner.png', alt: 'Luxury Resort Experience' },
+    { src: '/images/image (23).webp', alt: 'Mountain Resort Adventure' },
+    { src: '/images/image (5).webp', alt: 'Tropical Beach Paradise' },
+    { src: '/images/image (12).webp', alt: 'Luxury Cruise Ship at Sea' },
+    { src: '/images/image (18).webp', alt: 'Exotic Island Getaway' },
+    { src: '/images/image (27).webp', alt: 'Caribbean Sunset Experience' },
+    { src: '/images/image (31).webp', alt: 'Luxury Travel Destination' },
   ];
 
   const promoBarMessages = [
@@ -35,18 +35,26 @@ export default function Home() {
 
   return (
     <>
+      {/* Preload hero images */}
+      <link rel="preload" as="image" href="/images/image (23).webp" />
+      <link rel="preload" as="image" href="/images/image (5).webp" />
+      <link rel="preload" as="image" href="/images/image (12).webp" />
+      <link rel="preload" as="image" href="/images/image (18).webp" />
+      <link rel="preload" as="image" href="/images/image (27).webp" />
+      <link rel="preload" as="image" href="/images/image (31).webp" />
+
       {/* Scroll Animations */}
       <ScrollAnimations />
 
       {/* Promo Bar */}
       <PromoBar promos={promoBarMessages} />
 
-      {/* Hero Section with Image Grid */}
-      <HeroImageGrid 
+      {/* Hero Section with Carousel */}
+      <HeroCarousel 
         images={heroImages}
         title="Your Journey Begins Here"
         subtitle="Personalized travel planning for unforgettable experiences"
-        layout="2x3"
+        autoPlayInterval={5000}
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/contact" className="btn-secondary">
@@ -56,7 +64,7 @@ export default function Home() {
             Explore Our Services
           </Link>
         </div>
-      </HeroImageGrid>
+      </HeroCarousel>
 
       {/* Introduction */}
       <FadeInSection>
