@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PromotionCard from '@/components/PromotionCard';
 import HeroSingle from '@/components/HeroSingle';
+import EmailSignup from '@/components/EmailSignup';
+import ScrollToEmailButton from '@/components/ScrollToEmailButton';
 import { promotions, getPromotionsByCategory } from '@/data/promotions';
 
 export const metadata: Metadata = {
@@ -28,7 +30,9 @@ export default function Promos() {
         subtitle="Exclusive travel offers to help you save on your next adventure"
         overlay="gradient"
         compact
-      />
+      >
+        <ScrollToEmailButton />
+      </HeroSingle>
 
       {/* Introduction */}
       <section className="section-padding bg-white">
@@ -173,6 +177,9 @@ export default function Promos() {
           </div>
         </div>
       </section>
+
+      {/* Email Signup Section */}
+      <EmailSignup />
 
       {/* Call to Action */}
       <section className="section-padding bg-gradient-to-r from-primary to-accent text-white">

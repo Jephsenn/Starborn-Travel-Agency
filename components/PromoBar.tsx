@@ -22,8 +22,8 @@ export default function PromoBar({ promos }: PromoBarProps) {
   }, [promos.length]);
 
   return (
-    <div className="bg-secondary text-white py-2 pb-[0.6rem] text-center relative overflow-hidden">
-      <div className="relative h-6 md:h-7">
+    <div className="bg-secondary text-white text-center relative overflow-hidden h-16 md:h-14">
+      <div className="relative h-full flex items-center justify-center">
         {promos.map((promo, index) => (
           <div
             key={index}
@@ -47,7 +47,7 @@ export default function PromoBar({ promos }: PromoBarProps) {
       </div>
       
       {/* Dots Indicator */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-1.5 pb-0.5">
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1.5">
         {promos.map((_, index) => (
           <button
             key={index}

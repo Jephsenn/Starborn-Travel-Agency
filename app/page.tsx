@@ -7,6 +7,7 @@ import HeroCarousel from '@/components/HeroCarousel';
 import PromoBar from '@/components/PromoBar';
 import ScrollAnimations from '@/components/ScrollAnimations';
 import FadeInSection from '@/components/FadeInSection';
+import CompactEmailSignup from '@/components/CompactEmailSignup';
 import { promotions } from '@/data/promotions';
 import { testimonials } from '@/data/testimonials';
 import { faqs } from '@/data/faqs';
@@ -53,7 +54,7 @@ export default function Home() {
       <HeroCarousel 
         images={heroImages}
         title="Your Journey Begins Here"
-        subtitle="Personalized travel planning for unforgettable experiences"
+        subtitle="Personalized travel planning to make your dreams come true!"
         autoPlayInterval={5000}
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -247,6 +248,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </FadeInSection>
+
+      {/* Email Signup */}
+      <FadeInSection delay={100}>
+        <CompactEmailSignup />
       </FadeInSection>
 
       {/* FAQ Preview */}
