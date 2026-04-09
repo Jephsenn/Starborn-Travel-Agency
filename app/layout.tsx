@@ -45,7 +45,7 @@ export default function RootLayout({
       <body className="font-sans flex flex-col min-h-screen">
         <ScrollToTop />
         <Header />
-        <main className="flex-grow relative z-0">{children}</main>
+        <main className="flex-grow relative z-0 pt-20">{children}</main>
         <Footer />
       </body>
     </html>

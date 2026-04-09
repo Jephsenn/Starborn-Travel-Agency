@@ -2,13 +2,29 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  const isHomepage = pathname === '/';
+  const isTransparent = isHomepage && !isScrolled;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 80);
+    };
+
+    // Set initial state in case page loads already scrolled
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const mainNavLinks = [
     { href: '/', label: 'Home' },
@@ -29,7 +45,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isTransparent ? 'bg-transparent shadow-none' : 'bg-white shadow-md'
+      }`}
+    >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between relative">
           {/* Logo */}
@@ -52,22 +72,35 @@ export default function Header() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-neutral-700 font-medium transition-all duration-200 relative group ${
-                      isActive ? 'font-bold text-primary' : 'hover:text-primary'
+                    className={`font-medium transition-all duration-200 relative group ${
+                      isTransparent
+                        ? isActive
+                          ? 'text-white font-bold'
+                          : 'text-white/90 hover:text-white'
+                        : isActive
+                        ? 'font-bold text-primary'
+                        : 'text-neutral-700 hover:text-primary'
                     }`}
                   >
                     {link.label}
-                    <span className={`absolute left-0 bottom-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-200 ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}></span>
+                    <span
+                      className={`absolute left-0 bottom-0 w-full h-0.5 transform origin-left transition-transform duration-200 ${
+                        isTransparent ? 'bg-white' : 'bg-primary'
+                      } ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+                    />
                   </Link>
                 </li>
               );
             })}
+
             {/* More Dropdown */}
             <li className="relative">
               <button
-                className="text-neutral-700 hover:text-primary font-medium transition-colors duration-200 flex items-center"
+                className={`font-medium transition-colors duration-200 flex items-center ${
+                  isTransparent
+                    ? 'text-white/90 hover:text-white'
+                    : 'text-neutral-700 hover:text-primary'
+                }`}
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                 onMouseEnter={() => setMoreDropdownOpen(true)}
               >
@@ -77,7 +110,7 @@ export default function Header() {
                 </svg>
               </button>
               {moreDropdownOpen && (
-                <div 
+                <div
                   className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50"
                   onMouseLeave={() => setMoreDropdownOpen(false)}
                 >
@@ -103,7 +136,11 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-neutral-700 hover:text-primary focus:outline-none z-10"
+            className={`md:hidden focus:outline-none z-10 transition-colors duration-200 ${
+              isTransparent
+                ? 'text-white hover:text-white/80'
+                : 'text-neutral-700 hover:text-primary'
+            }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -121,7 +158,11 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <ul className="md:hidden mt-4 space-y-2 pb-4">
+          <ul
+            className={`md:hidden mt-4 space-y-2 pb-4 ${
+              isTransparent ? 'bg-black/40 backdrop-blur-sm rounded-xl px-4 py-3' : ''
+            }`}
+          >
             {mainNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -129,7 +170,13 @@ export default function Header() {
                   <Link
                     href={link.href}
                     className={`block py-2 font-medium transition-colors duration-200 ${
-                      isActive ? 'font-bold text-primary border-l-4 border-primary pl-2' : 'text-neutral-700 hover:text-primary'
+                      isTransparent
+                        ? isActive
+                          ? 'text-white font-bold border-l-4 border-white pl-2'
+                          : 'text-white/90 hover:text-white'
+                        : isActive
+                        ? 'font-bold text-primary border-l-4 border-primary pl-2'
+                        : 'text-neutral-700 hover:text-primary'
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -138,8 +185,14 @@ export default function Header() {
                 </li>
               );
             })}
-            <li className="border-t border-neutral-200 pt-2 mt-2">
-              <div className="text-xs text-neutral-500 uppercase font-semibold mb-2 px-2">More</div>
+            <li className={`border-t pt-2 mt-2 ${isTransparent ? 'border-white/30' : 'border-neutral-200'}`}>
+              <div
+                className={`text-xs uppercase font-semibold mb-2 px-2 ${
+                  isTransparent ? 'text-white/60' : 'text-neutral-500'
+                }`}
+              >
+                More
+              </div>
               {moreNavLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -147,7 +200,13 @@ export default function Header() {
                     key={link.href}
                     href={link.href}
                     className={`block py-2 pl-4 font-medium transition-colors duration-200 ${
-                      isActive ? 'font-bold text-primary border-l-4 border-primary' : 'text-neutral-700 hover:text-primary'
+                      isTransparent
+                        ? isActive
+                          ? 'text-white font-bold border-l-4 border-white'
+                          : 'text-white/90 hover:text-white'
+                        : isActive
+                        ? 'font-bold text-primary border-l-4 border-primary'
+                        : 'text-neutral-700 hover:text-primary'
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >

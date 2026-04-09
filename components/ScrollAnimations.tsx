@@ -124,10 +124,10 @@ export default function ScrollAnimations() {
         </div>
       </div>
 
-      {/* Flying Airplane */}
+      {/* Flying Airplane — hidden on mobile to prevent overlapping text/cards */}
       {airplaneVisible && (
         <div
-          className="fixed z-[1] pointer-events-none transition-opacity duration-500"
+          className="hidden md:block fixed z-[1] pointer-events-none transition-opacity duration-500"
           style={{
             left: `${airplaneX - 20}%`,
             top: `${30 + airplaneY}vh`,

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import PromotionCard from '@/components/PromotionCard';
+import PromoCarousel from '@/components/PromoCarousel';
 import TestimonialCard from '@/components/TestimonialCard';
 import FAQAccordionItem from '@/components/FAQAccordionItem';
 import HeroCarousel from '@/components/HeroCarousel';
@@ -63,12 +63,42 @@ export default async function Home() {
   const featuredTestimonials = testimonials.slice(0, 3);
 
   const heroImages = [
-    { src: '/images/image (23).webp', alt: 'Mountain Resort Adventure' },
-    { src: '/images/image (5).webp', alt: 'Tropical Beach Paradise' },
-    { src: '/images/image (12).webp', alt: 'Luxury Cruise Ship at Sea' },
-    { src: '/images/image (18).webp', alt: 'Exotic Island Getaway' },
-    { src: '/images/image (27).webp', alt: 'Caribbean Sunset Experience' },
-    { src: '/images/image (31).webp', alt: 'Luxury Travel Destination' },
+    {
+      src: '/images/image (23).webp',
+      alt: 'Mountain Resort Adventure',
+      title: 'Your Journey Begins Here',
+      subtitle: 'Personalized travel planning to make your dreams come true.',
+    },
+    {
+      src: '/images/image (5).webp',
+      alt: 'Tropical Beach Paradise',
+      title: 'Paradise Is Closer Than You Think',
+      subtitle: 'Let us craft your perfect escape — every detail taken care of.',
+    },
+    {
+      src: '/images/image (12).webp',
+      alt: 'Luxury Cruise Ship at Sea',
+      title: 'Set Sail on the Adventure of a Lifetime',
+      subtitle: 'Exclusive cruise packages tailored just for you.',
+    },
+    {
+      src: '/images/image (18).webp',
+      alt: 'Exotic Island Getaway',
+      title: "Discover the World's Hidden Gems",
+      subtitle: 'From exotic escapes to dream destinations — we\'ll get you there.',
+    },
+    {
+      src: '/images/image (27).webp',
+      alt: 'Caribbean Sunset Experience',
+      title: 'Your Next Chapter Starts with a Sunset',
+      subtitle: 'Unforgettable moments, expertly planned from start to finish.',
+    },
+    {
+      src: '/images/image (31).webp',
+      alt: 'Luxury Travel Destination',
+      title: 'Travel the Way You\'ve Always Dreamed',
+      subtitle: 'Premium experiences, personalized for your world.',
+    },
   ];
 
   return (
@@ -84,25 +114,82 @@ export default async function Home() {
       {/* Scroll Animations */}
       <ScrollAnimations />
 
-      {/* Promo Bar */}
+      {/* Hero Section — pulled up behind the fixed header via -mt-20 */}
+      <div className="-mt-20">
+        <HeroCarousel
+          images={heroImages}
+          title="Your Journey Begins Here"
+          subtitle="Personalized travel planning to make your dreams come true!"
+          autoPlayInterval={5000}
+        >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link
+              href="/contact"
+              className="btn-hero"
+              style={{ animation: 'ctaPulse 0.9s ease-out 1200ms 2' }}
+            >
+              Start Planning Your Trip
+            </Link>
+            <Link href="/services" className="btn-outline bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-primary">
+              Explore Our Services
+            </Link>
+          </div>
+        </HeroCarousel>
+      </div>
+
+      {/* Promo Bar — now lives below the hero in the content flow */}
       <PromoBar promos={promoBarMessages} />
 
-      {/* Hero Section with Carousel */}
-      <HeroCarousel 
-        images={heroImages}
-        title="Your Journey Begins Here"
-        subtitle="Personalized travel planning to make your dreams come true!"
-        autoPlayInterval={5000}
-      >
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contact" className="btn-secondary">
-            Start Planning Your Trip
-          </Link>
-          <Link href="/services" className="btn-outline bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-primary">
-            Explore Our Services
-          </Link>
-        </div>
-      </HeroCarousel>
+      {/* Trust Signals Bar */}
+      <FadeInSection>
+        <section className="bg-primary py-10">
+          <div className="container-custom">
+            <div className="grid grid-cols-2 md:grid-cols-4 text-white text-center">
+
+              <div className="flex flex-col items-center gap-2 px-6 py-4 md:py-0 md:border-r md:border-white/20">
+                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-1">
+                  <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <span className="text-3xl font-bold font-display">500+</span>
+                <span className="text-white/75 text-sm font-medium">Trips Planned</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 px-6 py-4 md:py-0 md:border-r md:border-white/20">
+                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-1">
+                  <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  </svg>
+                </div>
+                <span className="text-3xl font-bold font-display">5-Star</span>
+                <span className="text-white/75 text-sm font-medium">Client Satisfaction</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 px-6 py-4 md:py-0 md:border-r md:border-white/20">
+                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-1">
+                  <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <span className="text-3xl font-bold font-display">All Types</span>
+                <span className="text-white/75 text-sm font-medium">Disney, Cruises & More</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 px-6 py-4 md:py-0">
+                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-1">
+                  <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <span className="text-3xl font-bold font-display">$0</span>
+                <span className="text-white/75 text-sm font-medium">Our Fee to You</span>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </FadeInSection>
 
       {/* Introduction */}
       <FadeInSection>
@@ -128,7 +215,8 @@ export default async function Home() {
           <div className="container-custom">
             <h2 className="heading-lg text-center mb-12">How We Can Help You Travel</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300 relative z-10">
+            {/* Vacation Planning — blue */}
+            <div className="bg-white rounded-lg shadow-md p-6 text-center border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 relative z-10">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -140,9 +228,10 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300 relative z-10">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Cruises — cyan */}
+            <div className="bg-white rounded-lg shadow-md p-6 text-center border-t-4 border-cyan-500 hover:shadow-xl hover:scale-105 transition-all duration-300 relative z-10">
+              <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </div>
@@ -152,9 +241,10 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300 relative z-10">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Disney Travel — purple */}
+            <div className="bg-white rounded-lg shadow-md p-6 text-center border-t-4 border-accent hover:shadow-xl hover:scale-105 transition-all duration-300 relative z-10">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
@@ -263,20 +353,7 @@ export default async function Home() {
             </p>
           </div>
           
-          {/* Horizontal Scrolling Container */}
-          <div className="relative mb-8">
-            <div className="overflow-x-auto scrollbar-hide pb-4">
-              <div className="flex gap-6 min-w-max px-4 md:px-0">
-                {allPromos.map((promo) => (
-                  <div key={promo.id} className="w-[300px] flex-shrink-0">
-                    <PromotionCard promotion={promo} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* Scroll hint gradient */}
-            <div className="absolute top-0 right-0 bottom-4 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none hidden md:block"></div>
-          </div>
+          <PromoCarousel promos={allPromos} />
           
           <div className="text-center">
             <Link href="/promos" className="btn-primary">
