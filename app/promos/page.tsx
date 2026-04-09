@@ -4,18 +4,42 @@ import PromotionCard from '@/components/PromotionCard';
 import HeroSingle from '@/components/HeroSingle';
 import EmailSignup from '@/components/EmailSignup';
 import ScrollToEmailButton from '@/components/ScrollToEmailButton';
-import { promotions, getPromotionsByCategory } from '@/data/promotions';
+import { promotions as localPromotions, type Promotion } from '@/data/promotions';
+import { client } from '@/sanity/lib/client';
+import { promotionsQuery } from '@/sanity/lib/queries';
 
 export const metadata: Metadata = {
   title: 'Current Promotions & Deals | Starborn Travel Agency',
   description: 'Browse our latest travel deals and promotions including airfare discounts, cruise specials, Disney packages, and exclusive vacation offers.',
 };
 
-export default function Promos() {
-  const airfarePromos = getPromotionsByCategory('airfare');
-  const cruisePromos = getPromotionsByCategory('cruise');
-  const disneyPromos = getPromotionsByCategory('disney');
-  const generalPromos = getPromotionsByCategory('general');
+type SanityPromotion = {
+  _id: string;
+  title: string;
+  description: string;
+  category: 'airfare' | 'cruise' | 'disney' | 'general';
+  discount?: string;
+  validUntil?: string;
+  terms?: string;
+  featured?: boolean;
+};
+
+export default async function Promos() {
+  let allPromos: Promotion[] = localPromotions;
+
+  try {
+    const sanityPromos: SanityPromotion[] = await client.fetch(promotionsQuery, {}, { next: { revalidate: 3600 } });
+    if (sanityPromos && sanityPromos.length > 0) {
+      allPromos = sanityPromos.map((p) => ({ ...p, id: p._id }));
+    }
+  } catch {
+    // Sanity not configured — using local placeholder data
+  }
+
+  const airfarePromos = allPromos.filter((p) => p.category === 'airfare');
+  const cruisePromos = allPromos.filter((p) => p.category === 'cruise');
+  const disneyPromos = allPromos.filter((p) => p.category === 'disney');
+  const generalPromos = allPromos.filter((p) => p.category === 'general');
 
   return (
     <>

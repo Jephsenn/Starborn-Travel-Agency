@@ -8,12 +8,57 @@ import PromoBar from '@/components/PromoBar';
 import ScrollAnimations from '@/components/ScrollAnimations';
 import FadeInSection from '@/components/FadeInSection';
 import CompactEmailSignup from '@/components/CompactEmailSignup';
-import { promotions } from '@/data/promotions';
+import { promotions as localPromotions, type Promotion } from '@/data/promotions';
 import { testimonials } from '@/data/testimonials';
 import { faqs } from '@/data/faqs';
+import { client } from '@/sanity/lib/client';
+import { promotionsQuery } from '@/sanity/lib/queries';
 
-export default function Home() {
-  const allPromos = promotions;
+type SanityPromotion = {
+  _id: string;
+  title: string;
+  description: string;
+  category: 'airfare' | 'cruise' | 'disney' | 'general';
+  discount?: string;
+  validUntil?: string;
+  terms?: string;
+  featured?: boolean;
+};
+
+const categoryIcons: Record<string, string> = {
+  airfare: '✈️',
+  cruise: '🚢',
+  disney: '🏰',
+  general: '🌟',
+};
+
+export default async function Home() {
+  let allPromos: Promotion[] = localPromotions;
+
+  try {
+    const sanityPromos: SanityPromotion[] = await client.fetch(promotionsQuery, {}, { next: { revalidate: 3600 } });
+    if (sanityPromos && sanityPromos.length > 0) {
+      allPromos = sanityPromos.map((p) => ({ ...p, id: p._id }));
+    }
+  } catch {
+    // Sanity not configured — using local placeholder data
+  }
+
+  const featuredPromos = allPromos.filter((p) => p.featured);
+  const promoBarMessages =
+    featuredPromos.length > 0
+      ? featuredPromos.map((p) => ({
+          text: p.discount ? `${p.title} - ${p.discount}!` : p.title,
+          icon: categoryIcons[p.category] ?? '🌟',
+        }))
+      : [
+          { text: 'Limited Time: Save up to 40% on Summer Travel!', icon: '🌟' },
+          { text: 'Spring Break Flights - Save Up to $200!', icon: '✈️' },
+          { text: 'Caribbean Cruise Extravaganza - $500 Onboard Credit!', icon: '🚢' },
+          { text: 'Disney Magic Package - Up to 25% Off!', icon: '🏰' },
+          { text: 'All-Inclusive Resort Week - Save $300 per Couple!', icon: '🌴' },
+        ];
+
   const previewFAQs = faqs.slice(0, 4);
   const featuredTestimonials = testimonials.slice(0, 3);
 
@@ -24,14 +69,6 @@ export default function Home() {
     { src: '/images/image (18).webp', alt: 'Exotic Island Getaway' },
     { src: '/images/image (27).webp', alt: 'Caribbean Sunset Experience' },
     { src: '/images/image (31).webp', alt: 'Luxury Travel Destination' },
-  ];
-
-  const promoBarMessages = [
-    { text: 'Limited Time: Save up to 40% on Summer Travel!', icon: '🌟' },
-    { text: 'Spring Break Flights - Save Up to $200!', icon: '✈️' },
-    { text: 'Caribbean Cruise Extravaganza - $500 Onboard Credit!', icon: '🚢' },
-    { text: 'Disney Magic Package - Up to 25% Off!', icon: '🏰' },
-    { text: 'All-Inclusive Resort Week - Save $300 per Couple!', icon: '🌴' },
   ];
 
   return (
